@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ChatgptForAndroid</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="toast_empty">API Key 不能为空</string>
+    <string name="setting">设置</string>
+    <string name="main">主页</string>
+    <string name="history_chat">聊天历史</string>
+    <string name="new_chat">新会话</string>
+</resources>

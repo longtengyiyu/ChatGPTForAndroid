@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_0968"
+        android:orientation="vertical" >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="145dp"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="135dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="30dp"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_back" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="46dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                tools:text="name" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="30dp"
+                android:visibility="gone"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_setting" />
+        </FrameLayout>
+    </LinearLayout>
+</layout>
