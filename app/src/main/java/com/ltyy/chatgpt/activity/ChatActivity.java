@@ -25,11 +25,18 @@ import com.ltyy.chatgpt.utils.TextCheckedUtils;
 import com.ltyy.chatgpt.utils.ToastUtils;
 import com.ltyy.chatgpt.viewmodel.ChatViewModel;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+
 public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBinding, String> {
 
     private ChatAdapter adapter;
     private boolean isInput;
     private SendBtnAnimator animator = new SendBtnAnimator();
+    private Disposable disposable;
 
     public static void startChatActivity(Context context){
         context.startActivity(new Intent(context, ChatActivity.class));
@@ -135,11 +142,21 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
     }
 
     private void clickable(){
-        binding.tvSend.postDelayed(() -> binding.tvSend.setEnabled(true), AppConstants.DEFAULT_TIMEOUT * 1000);
+        stop();
+        disposable = Observable.timer(AppConstants.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong -> binding.tvSend.setEnabled(true));
+    }
+
+    private void stop(){
+        if (disposable != null && !disposable.isDisposed()){
+            disposable.dispose();
+        }
     }
 
     @Override
     protected void onResponseSuccess(String s) {
+        stop();
         binding.tvSend.setEnabled(true);
         int position = adapter.getItemCount() - 1;
         Chat chat = adapter.getItemData(position);
@@ -150,6 +167,7 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
 
     @Override
     protected void onResponseFail(String msg) {
+        stop();
         binding.tvSend.setEnabled(true);
 
     }

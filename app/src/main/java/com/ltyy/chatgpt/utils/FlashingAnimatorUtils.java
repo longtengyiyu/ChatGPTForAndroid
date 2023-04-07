@@ -7,9 +7,7 @@ public class FlashingAnimatorUtils {
 
     private static ObjectAnimator animator;
     public static void flash(View v){
-        if (animator == null){
-            animator = ObjectAnimator.ofFloat(v, "alpha", 1, 0, 1);
-        }
+        animator = ObjectAnimator.ofFloat(v, "alpha", 1, 0, 1);
         animator.setDuration(1000);
         animator.setRepeatCount(-1);
         animator.start();
