@@ -3,6 +3,7 @@ package com.ltyy.chatgpt.api;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.ltyy.chatgpt.app.AppConstants;
 import com.ltyy.chatgpt.app.AppSPContact;
 import com.ltyy.chatgpt.bean.PromptRes;
 import com.ltyy.chatgpt.param.PromptParams;
@@ -32,8 +33,6 @@ public class ApiMethods {
     private static final String TAG = ApiMethods.class.getSimpleName();
     private static volatile ApiMethods singleton = null;
     private ApiService appApiService;
-    private static final long DEFAULT_TIMEOUT = 60;
-    private static final long HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 10 * 1024 * 1024;//10MB
 
     public ApiMethods(ApiService apiService){
         this.appApiService = apiService;
@@ -111,9 +110,9 @@ public class ApiMethods {
                 .addInterceptor(requestInterceptor)
                 .addNetworkInterceptor(rewriteCacheControlInterceptor)
                 .addInterceptor(rewriteCacheControlInterceptor)
-                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .cache(new Cache(cacheDir, HTTP_RESPONSE_DISK_CACHE_MAX_SIZE))
+                .connectTimeout(AppConstants.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(AppConstants.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .cache(new Cache(cacheDir, AppConstants.HTTP_RESPONSE_DISK_CACHE_MAX_SIZE))
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .client(httpClientBuilder)

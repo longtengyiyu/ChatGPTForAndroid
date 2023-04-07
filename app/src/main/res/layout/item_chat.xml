@@ -8,11 +8,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_icon"
-            android:layout_width="65dp"
+            android:layout_width="48dp"
             android:layout_height="65dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="130dp"
-            />
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="130dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_name"
@@ -21,7 +20,7 @@
             android:textColor="@color/color_0968"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:textSize="56dp"
+            android:textSize="48dp"
             android:layout_marginStart="200dp"
             android:layout_gravity="center_vertical"
             tools:text="新会话"/>

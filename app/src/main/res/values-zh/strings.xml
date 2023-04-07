@@ -10,4 +10,5 @@
     <string name="chat">聊天</string>
     <string name="tips_chat">开始新的聊天</string>
     <string name="hide_msg"></string>
+    <string name="toast_network_error">网络连接错误</string>
 </resources>

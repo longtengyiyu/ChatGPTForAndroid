@@ -8,4 +8,7 @@ public class AppConstants {
     public final static String APP_DB = APP_DB_PATH + "chat-db";
 
     public static final String MSG_EMPTY = "msg_empty";
+
+    public static final long DEFAULT_TIMEOUT = 60;
+    public static final long HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 10 * 1024 * 1024;//10MB
 }

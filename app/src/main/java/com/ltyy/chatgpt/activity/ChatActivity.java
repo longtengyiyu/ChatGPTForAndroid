@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ltyy.chatgpt.R;
 import com.ltyy.chatgpt.adapter.ChatAdapter;
 import com.ltyy.chatgpt.animator.SendBtnAnimator;
+import com.ltyy.chatgpt.app.AppConstants;
 import com.ltyy.chatgpt.base.BaseMVVMActivity;
 import com.ltyy.chatgpt.databinding.ActivityChatBinding;
 import com.ltyy.chatgpt.entity.Chat;
 import com.ltyy.chatgpt.utils.CommonUtils;
+import com.ltyy.chatgpt.utils.NetworkUtils;
 import com.ltyy.chatgpt.utils.TextCheckedUtils;
+import com.ltyy.chatgpt.utils.ToastUtils;
 import com.ltyy.chatgpt.viewmodel.ChatViewModel;
 
 public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBinding, String> {
@@ -112,18 +115,27 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
     }
 
     public void send(View v){
-        String content = binding.msgSay.getText().toString();
-        CommonUtils.hideSoftInput(this);
-        if (TextCheckedUtils.checked(content)){
-            binding.msgSay.setText("");
-            binding.tvSend.setEnabled(false);
-            Chat chat = new Chat();
-            chat.setType(Chat.TYPE_USER);
-            chat.setContent(content);
-            adapter.addItem(chat);
-            addInput();
-            viewModel.loadPrompt(content);
+        if (NetworkUtils.isNetworkAvailable(ChatActivity.this)){
+            String content = binding.msgSay.getText().toString();
+            CommonUtils.hideSoftInput(this);
+            if (TextCheckedUtils.checked(content)){
+                binding.msgSay.setText("");
+                binding.tvSend.setEnabled(false);
+                Chat chat = new Chat();
+                chat.setType(Chat.TYPE_USER);
+                chat.setContent(content);
+                adapter.addItem(chat);
+                addInput();
+                clickable();
+                viewModel.loadPrompt(content);
+            }
+        }else {
+            ToastUtils.showToast(R.string.toast_network_error);
         }
+    }
+
+    private void clickable(){
+        binding.tvSend.postDelayed(() -> binding.tvSend.setEnabled(true), AppConstants.DEFAULT_TIMEOUT * 1000);
     }
 
     @Override
