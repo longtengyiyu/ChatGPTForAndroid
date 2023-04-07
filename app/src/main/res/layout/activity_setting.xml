@@ -51,6 +51,32 @@
             android:layout_marginEnd="70dp"
             android:src="@drawable/ic_hide_pwd"/>
 
+        <View
+            android:id="@+id/view_api_host_bg"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/shape_edit_bg"
+            app:layout_constraintTop_toBottomOf="@+id/view_edit_bg" />
+
+        <EditText
+            android:id="@+id/et_api_host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="200dp"
+            android:textSize="36dp"
+            android:hint="OpenAI API host"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view_api_host_bg"
+            app:layout_constraintBottom_toBottomOf="@+id/view_api_host_bg"
+            app:layout_constraintEnd_toStartOf="parent"
+            tools:text="" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="64dp"

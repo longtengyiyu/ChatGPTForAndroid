@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.ltyy.chatgpt.databinding.WidgetActionBarBinding;
 
@@ -40,6 +41,18 @@ public class ChatActionBar extends LinearLayout {
         }else {
             ViewUtils.setVisible(binding.ivBack);
         }
+    }
+
+    public void hideSetting(boolean isHide){
+        if (isHide){
+            ViewUtils.setGone(binding.ivSetting);
+        }else {
+            ViewUtils.setVisible(binding.ivSetting);
+        }
+    }
+
+    public AppCompatImageView getSetting(){
+        return binding.ivSetting;
     }
 
     public void setTitle(String title) {

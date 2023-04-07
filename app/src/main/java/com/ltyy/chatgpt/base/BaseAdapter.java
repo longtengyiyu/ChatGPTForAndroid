@@ -48,6 +48,17 @@ public class BaseAdapter <VH extends BaseViewHolder<T>, T> extends RecyclerView.
         addItems(data, dataList.size());
     }
 
+    public void addItem(T data) {
+        addItem(data, dataList.size());
+    }
+
+    public void addItem(T data, int position) {
+        if (position >= 0 && position <= dataList.size()) {
+            dataList.add(position, data);
+            notifyItemInserted(position);
+        }
+    }
+
     public void addItems(List<T> data, int position) {
         if (position >= 0 && position <= dataList.size() && data != null && data.size() > 0) {
             dataList.addAll(position, data);

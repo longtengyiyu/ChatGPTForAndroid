@@ -3,7 +3,8 @@
     <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_icon"
@@ -17,9 +18,9 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_1296db"
+            android:textColor="@color/color_0968"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:textSize="56dp"
             android:layout_marginStart="200dp"
             android:layout_gravity="center_vertical"
@@ -29,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_gravity="bottom"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="130dp"
             android:background="@color/color_c" />
 
     </FrameLayout>

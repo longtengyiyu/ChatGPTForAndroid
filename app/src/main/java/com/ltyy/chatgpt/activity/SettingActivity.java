@@ -10,11 +10,13 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.ltyy.chatgpt.R;
+import com.ltyy.chatgpt.api.ApiMethods;
 import com.ltyy.chatgpt.app.AppSPContact;
 import com.ltyy.chatgpt.base.BaseViewDataBindingActivity;
 import com.ltyy.chatgpt.databinding.ActivitySettingBinding;
 import com.ltyy.chatgpt.utils.CommonUtils;
 import com.ltyy.chatgpt.utils.LogUtils;
+import com.ltyy.chatgpt.utils.TextCheckedUtils;
 import com.ltyy.chatgpt.utils.ToastUtils;
 
 public class SettingActivity extends BaseViewDataBindingActivity<ActivitySettingBinding> {
@@ -47,18 +49,16 @@ public class SettingActivity extends BaseViewDataBindingActivity<ActivitySetting
     public void save(View v){
         hideSoft(v);
         String apiKey = binding.etApiKey.getText().toString();
-        if (checked(apiKey)){
+        String apiHost = binding.etApiHost.getText().toString();
+        if (TextCheckedUtils.checked(apiKey)){
             getSharedPreferencesUtils().putString(AppSPContact.SP_PARAM_API_KEY, apiKey);
+            if (TextUtils.isEmpty(apiHost)){
+                apiHost = "https://api.openai.com/";
+            }
+            getSharedPreferencesUtils().putString(AppSPContact.SP_PARAM_API_HOST, apiHost);
+            ApiMethods.instance(SettingActivity.this);
             finishAndStartActivity();
         }
-    }
-
-    private boolean checked(String apiKey){
-        if (TextUtils.isEmpty(apiKey)){
-            ToastUtils.showToast(R.string.toast_empty);
-            return false;
-        }
-        return true;
     }
 
     public void cancel(View v){
@@ -78,7 +78,7 @@ public class SettingActivity extends BaseViewDataBindingActivity<ActivitySetting
     public void press(View v){
         hideSoft(v);
         String apiKey = binding.etApiKey.getText().toString();
-        if (checked(apiKey)){
+        if (TextCheckedUtils.checked(apiKey)){
             showPwd = !showPwd;
             updatePwdIcon();
             updatePwdTextStyle();

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ltyy.chatgpt.utils.AppDpiUtils;
 import com.ltyy.chatgpt.utils.SharedPreferencesUtils;
 
-public class BaseAbstractActivity extends AppCompatActivity {
+public abstract class BaseAbstractActivity extends AppCompatActivity {
 
     protected final String TAG =  getClass().getSimpleName();
     private SharedPreferencesUtils sPreferencesUtils;
@@ -48,4 +48,6 @@ public class BaseAbstractActivity extends AppCompatActivity {
             actionBar.hide();
         }
     }
+
+    protected abstract int getContentLayoutRes();
 }

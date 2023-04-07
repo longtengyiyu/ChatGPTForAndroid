@@ -13,6 +13,8 @@ import com.ltyy.chatgpt.app.AppApplication;
 import com.ltyy.chatgpt.base.BaseViewDataBindingActivity;
 import com.ltyy.chatgpt.bean.Icon;
 import com.ltyy.chatgpt.databinding.ActivityMainBinding;
+import com.ltyy.chatgpt.listener.OnItemClickListener;
+import com.ltyy.chatgpt.widget.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +37,17 @@ public class MainActivity extends BaseViewDataBindingActivity<ActivityMainBindin
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding.chatBar.setTitle(R.string.main);
+        chatBar();
         initData();
         initRy();
+    }
+
+    private void chatBar(){
+        binding.chatBar.setTitle(R.string.main);
+        binding.chatBar.hideSetting(false);
+        binding.chatBar.getSetting().setOnClickListener(v ->{
+            SettingActivity.startSettingActivity(MainActivity.this);
+        });
     }
 
     private void initData(){
@@ -62,6 +72,16 @@ public class MainActivity extends BaseViewDataBindingActivity<ActivityMainBindin
         adapter = new ListAdapter(this);
         binding.recyclerView.setAdapter(adapter);
         adapter.addItems(ds);
+        adapter.setListener(position -> {
+            switch (position){
+                case 0:
+                    HistoryActivity.startHistoryActivity(MainActivity.this);
+                    break;
+                case 1:
+                    ChatActivity.startChatActivity(MainActivity.this);
+                    break;
+            }
+        });
     }
 
 

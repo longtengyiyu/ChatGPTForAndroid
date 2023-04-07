@@ -6,5 +6,8 @@
     <string name="setting">设置</string>
     <string name="main">主页</string>
     <string name="history_chat">聊天历史</string>
-    <string name="new_chat">新会话</string>
+    <string name="new_chat">新聊天</string>
+    <string name="chat">聊天</string>
+    <string name="tips_chat">开始新的聊天</string>
+    <string name="hide_msg"></string>
 </resources>

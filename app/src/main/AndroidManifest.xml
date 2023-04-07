@@ -28,7 +28,8 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".activity.ChatActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity android:name=".activity.HistoryActivity"
             android:screenOrientation="portrait"/>

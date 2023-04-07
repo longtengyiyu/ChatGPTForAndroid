@@ -1,8 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.ltyy.chatgpt.widget.ChatActionBar
+            android:id="@+id/chat_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:background="@color/color_de">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/layout_bottom"
+                android:overScrollMode="never"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_above="@+id/layout_bottom"
+                android:background="@color/color_d3"/>
+
+            <FrameLayout
+                android:id="@+id/layout_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_f7"
+                android:padding="20dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/shape_edit"/>
+
+                <EditText
+                    android:id="@+id/msg_say"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:textSize="40dp"
+                    android:paddingLeft="12dp"
+                    android:textCursorDrawable=""
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/tv_send"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:visibility="visible"
+                    android:textSize="40dp"
+                    android:onClick="send"
+                    android:src="@drawable/ic_send" />
+            </FrameLayout>
+        </RelativeLayout>
+    </LinearLayout>
 </layout>

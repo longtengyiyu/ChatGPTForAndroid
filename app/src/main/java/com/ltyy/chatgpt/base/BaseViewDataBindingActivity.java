@@ -14,6 +14,4 @@ public abstract class BaseViewDataBindingActivity<B extends ViewDataBinding> ext
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getContentLayoutRes());
     }
-
-    protected abstract int getContentLayoutRes();
 }
