@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.ltyy.chatgpt.app.AppSPContact;
 import com.ltyy.chatgpt.bean.PromptRes;
 import com.ltyy.chatgpt.param.PromptParams;
+import com.ltyy.chatgpt.utils.JsonUtils;
 import com.ltyy.chatgpt.utils.LogUtils;
 import com.ltyy.chatgpt.utils.NetworkUtils;
 import com.ltyy.chatgpt.utils.SharedPreferencesUtils;
@@ -31,9 +32,8 @@ public class ApiMethods {
     private static final String TAG = ApiMethods.class.getSimpleName();
     private static volatile ApiMethods singleton = null;
     private ApiService appApiService;
-    private static final long DEFAULT_TIMEOUT = 10;
+    private static final long DEFAULT_TIMEOUT = 60;
     private static final long HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 10 * 1024 * 1024;//10MB
-    private Gson gson = new Gson();
 
     public ApiMethods(ApiService apiService){
         this.appApiService = apiService;
@@ -77,6 +77,7 @@ public class ApiMethods {
                     .newBuilder()
                     .header("Authorization", "Bearer " + apiKey)
                     .build();
+            LogUtils.d(TAG, "apiKey:" + apiKey);
             LogUtils.d(TAG, "AppApiService url:" + request.url().toString());
             return chain.proceed(request);
         };
@@ -129,7 +130,8 @@ public class ApiMethods {
     }
 
     public void getPrompt(Observer<PromptRes> observer, PromptParams param) {
-        appApiService.getPrompt(createRequestBody(gson.toJson(param))).subscribe(observer);
+        appApiService.getPrompt(createRequestBody(JsonUtils.get().toJson(param))).
+                compose(new RedirectResponseTransformer<>()).subscribe(observer);
     }
 
 }

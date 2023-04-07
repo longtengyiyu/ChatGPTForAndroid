@@ -1,9 +1,13 @@
 package com.ltyy.chatgpt.param;
 
+
+import com.ltyy.chatgpt.bean.Message;
+
+import java.util.List;
+
 public class PromptParams {
-    private String model = "text-davinci-003";
-    private String prompt;
-    private Integer max_tokens = 256;
+    private String model = "gpt-3.5-turbo";//"text-davinci-003";
+    private List<Message> messages;
     private float temperature = 0.5f;
     private Integer top_p = 1;
     private Integer n = 1;
@@ -19,20 +23,12 @@ public class PromptParams {
         this.model = model;
     }
 
-    public String getPrompt() {
-        return prompt;
+    public List<Message> getMessages() {
+        return messages;
     }
 
-    public void setPrompt(String prompt) {
-        this.prompt = prompt;
-    }
-
-    public Integer getMax_tokens() {
-        return max_tokens;
-    }
-
-    public void setMax_tokens(Integer max_tokens) {
-        this.max_tokens = max_tokens;
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     public float getTemperature() {

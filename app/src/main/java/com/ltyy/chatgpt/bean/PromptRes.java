@@ -4,26 +4,53 @@ import java.util.List;
 
 public class PromptRes {
 //    {
-//        "id": "cmpl-6j9PhjAom9GyxBNCVacvckcVNKVZg",
-//            "object": "text_completion",
-//            "created": 1676218965,
-//            "model": "text-davinci-003",
-//            "choices": [
-//        {
-//            "text": "？\n\n我可以背诵50位圆周率：3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679。",
+//        "id": "chatcmpl-123",
+//              "object": "chat.completion",
+//              "created": 1677652288,
+//              "choices": [{
 //                "index": 0,
-//                "logprobs": null,
-//                "finish_reason": "stop"
-//        }
-//  ],
+//                "message": {
+//                "role": "assistant",
+//                "content": "Hello there, how may I assist you today"
+//               },
+//        "finish_reason": "stop"
+//    }],
 //        "usage": {
-//        "prompt_tokens": 21,
-//                "completion_tokens": 73,
-//                "total_tokens": 94
+//        "prompt_tokens": 9,
+//                "completion_tokens": 12,
+//                "total_tokens": 21
 //    }
 //    }
 
+    private String id;
+    private String object;
+    private String created;
     private List<Prompt> choices;
+    private String Usage;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getObject() {
+        return object;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
 
     public List<Prompt> getChoices() {
         return choices;
@@ -31,5 +58,13 @@ public class PromptRes {
 
     public void setChoices(List<Prompt> choices) {
         this.choices = choices;
+    }
+
+    public String getUsage() {
+        return Usage;
+    }
+
+    public void setUsage(String usage) {
+        Usage = usage;
     }
 }

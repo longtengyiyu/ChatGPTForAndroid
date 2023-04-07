@@ -6,4 +6,6 @@ public class AppConstants {
     public final static String APP_DB_PATH = APP_ROOT_PATH + "/cache/";
 
     public final static String APP_DB = APP_DB_PATH + "chat-db";
+
+    public static final String MSG_EMPTY = "msg_empty";
 }

@@ -9,6 +9,6 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
-    @POST("v1/completions")
+    @POST("v1/chat/completions")
     Observable<PromptRes> getPrompt(@Body RequestBody body);
 }

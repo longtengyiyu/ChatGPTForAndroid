@@ -1,11 +1,14 @@
 package com.ltyy.chatgpt.viewmodel;
 
-import com.google.gson.Gson;
 import com.ltyy.chatgpt.base.BaseViewModel;
+import com.ltyy.chatgpt.bean.Message;
+import com.ltyy.chatgpt.bean.Prompt;
 import com.ltyy.chatgpt.bean.PromptRes;
 import com.ltyy.chatgpt.model.ChatModel;
 import com.ltyy.chatgpt.param.PromptParams;
-import com.ltyy.chatgpt.utils.LogUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
@@ -18,6 +21,8 @@ public class ChatViewModel extends BaseViewModel<String> {
         chatModel = new ChatModel();
     }
     private PromptParams params;
+    private List<Message> messages = new ArrayList<>();
+    private Message message;
 
     public void loadPrompt(String prompt){
         chatModel.loadPrompt(new Observer<PromptRes>() {
@@ -28,8 +33,16 @@ public class ChatViewModel extends BaseViewModel<String> {
 
             @Override
             public void onNext(@NonNull PromptRes promptRes) {
-                if (promptRes != null){
-                    LogUtils.d(TAG, new Gson().toJson(promptRes));
+                if (promptRes != null && promptRes.getChoices() != null &&
+                        !promptRes.getChoices().isEmpty()){
+                    Prompt prompt = promptRes.getChoices().get(0);
+                    if (prompt != null){
+                        Message message = prompt.getMessage();
+                        if (message != null){
+                            String content = message.getContent();
+                            getData().postValue(content);
+                        }
+                    }
                 }
             }
 
@@ -49,7 +62,12 @@ public class ChatViewModel extends BaseViewModel<String> {
         if (params == null){
             params = new PromptParams();
         }
-        params.setPrompt(prompt);
+        if (message == null){
+            message = new Message();
+        }
+        message.setContent(prompt);
+        messages.add(message);
+        params.setMessages(messages);
         return params;
     }
 }

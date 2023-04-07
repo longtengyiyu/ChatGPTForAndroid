@@ -116,4 +116,18 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
         }
     }
 
+    @Override
+    protected void onResponseSuccess(String s) {
+        binding.tvSend.setEnabled(true);
+        Chat chat = new Chat();
+        chat.setType(Chat.TYPE_AI);
+        chat.setContent(s.replaceAll("\n", ""));
+        adapter.addItem(chat);
+    }
+
+    @Override
+    protected void onResponseFail(String msg) {
+        binding.tvSend.setEnabled(true);
+
+    }
 }
