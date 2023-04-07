@@ -102,6 +102,15 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
         adapter.addItem(chat);
     }
 
+    public void addInput(){
+        binding.tvSend.postDelayed(() -> {
+            Chat chat = new Chat();
+            chat.setType(Chat.TYPE_INPUT);
+            chat.setContent("");
+            adapter.addItem(chat);
+        }, 500);
+    }
+
     public void send(View v){
         String content = binding.msgSay.getText().toString();
         CommonUtils.hideSoftInput(this);
@@ -112,6 +121,7 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
             chat.setType(Chat.TYPE_USER);
             chat.setContent(content);
             adapter.addItem(chat);
+            addInput();
             viewModel.loadPrompt(content);
         }
     }
@@ -119,10 +129,11 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
     @Override
     protected void onResponseSuccess(String s) {
         binding.tvSend.setEnabled(true);
-        Chat chat = new Chat();
+        int position = adapter.getItemCount() - 1;
+        Chat chat = adapter.getItemData(position);
         chat.setType(Chat.TYPE_AI);
         chat.setContent(s.replaceAll("\n", ""));
-        adapter.addItem(chat);
+        adapter.notifyItemChanged(position);
     }
 
     @Override

@@ -10,6 +10,8 @@ public class Chat {
     public static final int TYPE_AI = 0;
     public static final int TYPE_USER = 1;
     public static final int TYPE_TIPS = 2;
+    public static final int TYPE_INPUT = 3;
+
     private Long groupId;
     @Id(autoincrement = true)
     private Long id;
@@ -60,6 +62,10 @@ public class Chat {
 
     public boolean isRightMessage(){
         return type == TYPE_USER;
+    }
+
+    public boolean isInput(){
+        return type == TYPE_INPUT;
     }
 
     public Long getGroupId() {

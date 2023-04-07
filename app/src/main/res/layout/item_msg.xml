@@ -51,5 +51,12 @@
             android:textColor="@color/white"
             tools:text="hello"/>
 
+        <View
+            android:id="@+id/view_input"
+            android:layout_width="12dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/black"/>
+
     </FrameLayout>
 </layout>

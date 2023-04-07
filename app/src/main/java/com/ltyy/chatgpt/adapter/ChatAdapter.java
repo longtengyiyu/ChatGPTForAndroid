@@ -8,6 +8,7 @@ import com.ltyy.chatgpt.base.BaseAdapter;
 import com.ltyy.chatgpt.base.BaseViewHolder;
 import com.ltyy.chatgpt.entity.Chat;
 import com.ltyy.chatgpt.databinding.ItemMsgBinding;
+import com.ltyy.chatgpt.utils.FlashingAnimatorUtils;
 import com.ltyy.chatgpt.widget.ViewUtils;
 
 public class ChatAdapter extends BaseAdapter<BaseViewHolder<Chat>, Chat> {
@@ -32,13 +33,17 @@ public class ChatAdapter extends BaseAdapter<BaseViewHolder<Chat>, Chat> {
 
         @Override
         public void bindViewData(Chat data) {
-            ViewUtils.setGone(binding.tvLeftMsg, binding.tvRightMsg, binding.tvCenterMsg);
+            ViewUtils.setGone(binding.tvLeftMsg, binding.tvRightMsg, binding.tvCenterMsg, binding.viewInput);
+            FlashingAnimatorUtils.stopFlash();
             if (data.isLeftMessage()){
                 ViewUtils.setVisible(binding.tvLeftMsg);
                 binding.tvLeftMsg.setText(data.getContent());
             } else if (data.isRightMessage()){
                 ViewUtils.setVisible(binding.tvRightMsg);
                 binding.tvRightMsg.setText(data.getContent());
+            } else if (data.isInput()){
+                ViewUtils.setVisible(binding.viewInput);
+                FlashingAnimatorUtils.flash(binding.viewInput);
             } else {
                 ViewUtils.setVisible(binding.tvCenterMsg);
                 binding.tvCenterMsg.setText(data.getContent());
