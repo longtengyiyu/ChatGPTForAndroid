@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -102,6 +103,10 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
             public void afterTextChanged(Editable s) {
 
             }
+        });
+        binding.msgSay.setOnTouchListener((v, event) -> {
+            binding.recyclerView.scrollToPosition(adapter.getItemCount()-1);
+            return false;
         });
     }
 
