@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public abstract class BaseViewModel<T> extends ViewModel {
-    protected final String TAG = BaseViewModel.class.getSimpleName();
+    protected final String TAG = getClass().getSimpleName();
 
     /**
      * data

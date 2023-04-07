@@ -82,6 +82,7 @@ public class SettingActivity extends BaseViewDataBindingActivity<ActivitySetting
             showPwd = !showPwd;
             updatePwdIcon();
             updatePwdTextStyle();
+            binding.etApiKey.setSelection(apiKey.length());
         }
     }
 

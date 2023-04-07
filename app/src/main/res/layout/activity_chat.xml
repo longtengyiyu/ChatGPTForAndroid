@@ -50,7 +50,7 @@
                     android:layout_height="120dp"
                     android:textSize="40dp"
                     android:paddingLeft="12dp"
-                    android:textCursorDrawable=""
+                    android:textCursorDrawable="@drawable/shape_et_cursor"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:focusable="true"
