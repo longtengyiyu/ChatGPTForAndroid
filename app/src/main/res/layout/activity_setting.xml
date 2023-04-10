@@ -72,7 +72,7 @@
             android:layout_marginEnd="200dp"
             android:textCursorDrawable="@drawable/shape_et_cursor"
             android:textSize="36dp"
-            android:hint="OpenAI API host"
+            android:hint="OpenAI API host,default 'https://api.openai.com/'"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view_api_host_bg"
             app:layout_constraintBottom_toBottomOf="@+id/view_api_host_bg"
