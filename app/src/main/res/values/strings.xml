@@ -11,4 +11,5 @@
     <string name="tips_chat">Start a new chat</string>
     <string name="hide_msg"></string>
     <string name="toast_network_error">network error</string>
+    <string name="time_out">connect time out</string>
 </resources>

@@ -11,6 +11,8 @@ public class AppConstants {
 
     public static final String NEED_TURN = "needTurn";
 
+    public static final String GROUP_ID = "groupId";
+
     public static final long DEFAULT_TIMEOUT = 60;
     public static final long HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 10 * 1024 * 1024;//10MB
 }

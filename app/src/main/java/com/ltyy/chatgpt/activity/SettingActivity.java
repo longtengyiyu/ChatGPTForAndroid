@@ -36,7 +36,9 @@ public class SettingActivity extends BaseViewDataBindingActivity<ActivitySetting
         super.onCreate(savedInstanceState);
         binding.chatBar.setTitle(R.string.setting);
         load();
-        needTurn = savedInstanceState.getBoolean(AppConstants.NEED_TURN);
+        if (getIntent() != null){
+            needTurn = getIntent().getBooleanExtra(AppConstants.NEED_TURN, false);
+        }
     }
 
     @Override

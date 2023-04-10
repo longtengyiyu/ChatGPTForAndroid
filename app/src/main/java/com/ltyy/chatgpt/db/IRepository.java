@@ -1,6 +1,7 @@
 package com.ltyy.chatgpt.db;
 
 import com.ltyy.chatgpt.entity.Chat;
+import com.ltyy.chatgpt.entity.Group;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface IRepository {
      * 获取group id
      * @return
      */
-    Observable<Integer> getChatGroupId();
+    Observable<Long> getChatGroupId();
     /**
      * save chat message
      * @param chat
@@ -20,9 +21,23 @@ public interface IRepository {
      */
     Observable<Boolean> saveChat(Chat chat);
 
+
+    /**
+     * insert group
+     * @param group
+     * @return
+     */
+    Observable<Boolean> insertGroup(Group group);
+
+    /**
+     * get group list
+     * @return
+     */
+    Observable<List<Group>> getGroupList();
+
     /**
      * get chat message list
      * @return
      */
-    Observable<List<Chat>> getChatListByGroupId(String name);
+    Observable<List<Chat>> getChatListByGroupId(long groupId);
 }

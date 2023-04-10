@@ -57,6 +57,7 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
             CommonUtils.hideSoftInput(this);
             return false;
         });
+        viewModel.getGroupId();
         animator.hideAnimator(binding.tvSend);
         textChanged();
         initRy();
@@ -136,6 +137,7 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
                 Chat chat = new Chat();
                 chat.setType(Chat.TYPE_USER);
                 chat.setContent(content);
+                viewModel.save(chat);
                 adapter.addItem(chat);
                 addInput();
                 clickable();
@@ -150,7 +152,7 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
         stop();
         disposable = Observable.timer(AppConstants.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> binding.tvSend.setEnabled(true));
+                .subscribe(aLong -> addResChat(getString(R.string.time_out)));
     }
 
     private void stop(){
@@ -162,11 +164,16 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
     @Override
     protected void onResponseSuccess(String s) {
         stop();
+        addResChat(s);
+    }
+
+    private void addResChat(String content){
         binding.tvSend.setEnabled(true);
         int position = adapter.getItemCount() - 1;
         Chat chat = adapter.getItemData(position);
         chat.setType(Chat.TYPE_AI);
-        chat.setContent(s.replaceAll("\n", ""));
+        chat.setContent(content.replaceAll("\n", ""));
+        viewModel.saveChat(chat);
         adapter.notifyItemChanged(position);
     }
 
@@ -174,6 +181,5 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
     protected void onResponseFail(String msg) {
         stop();
         binding.tvSend.setEnabled(true);
-
     }
 }

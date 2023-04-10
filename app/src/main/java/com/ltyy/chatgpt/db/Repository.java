@@ -2,6 +2,12 @@ package com.ltyy.chatgpt.db;
 
 
 import com.ltyy.chatgpt.entity.Chat;
+import com.ltyy.chatgpt.entity.Group;
+import com.ltyy.chatgpt.greendao.ChatDao;
+import com.ltyy.chatgpt.greendao.DaoSession;
+import com.ltyy.chatgpt.greendao.GroupDao;
+import com.ltyy.chatgpt.utils.JsonUtils;
+import com.ltyy.chatgpt.utils.LogUtils;
 
 import java.util.List;
 
@@ -23,10 +29,10 @@ public class Repository implements IRepository{
 
   private static final String TAG = Repository.class.getSimpleName();
   private volatile static Repository INSTANCE = null;
-//  private DaoSession daoSession;
+  private DaoSession daoSession;
 
   private Repository(){
-//    daoSession = ChatDaoHelper.instance().getDaoSession();
+    daoSession = ChatDaoHelper.instance().getDaoSession();
   }
 
   public static Repository getInstance(){
@@ -38,9 +44,6 @@ public class Repository implements IRepository{
     return INSTANCE;
   }
 
-
-
-
   private <T> void objNextOrErr(Emitter<T> emitter, T obj){
     if(obj != null){
       emitter.onNext(obj);
@@ -51,17 +54,57 @@ public class Repository implements IRepository{
   }
 
   @Override
-  public Observable<Integer> getChatGroupId() {
-    return null;
+  public Observable<Long> getChatGroupId() {
+    return Observable.create(e -> {
+      GroupDao dao = daoSession.getGroupDao();
+      Group group = dao.queryBuilder().orderDesc(GroupDao.Properties.Id).limit(1).unique();
+      if (group == null){
+        e.onNext(0L);
+      }else{
+        long id = group.getId() + 1;
+        e.onNext(id);
+      }
+      e.onComplete();
+    });
   }
 
   @Override
   public Observable<Boolean> saveChat(Chat chat) {
-    return null;
+    return Observable.create(e -> {
+      ChatDao dao = daoSession.getChatDao();
+      dao.insert(chat);
+    });
   }
 
   @Override
-  public Observable<List<Chat>> getChatListByGroupId(String name) {
-    return null;
+  public Observable<Boolean> insertGroup(Group group) {
+    return Observable.create(e -> {
+      GroupDao dao = daoSession.getGroupDao();
+      dao.insertInTx(group);
+      e.onNext(Boolean.TRUE);
+      e.onComplete();
+    });
+  }
+
+  @Override
+  public Observable<List<Group>> getGroupList() {
+    return Observable.create(e -> {
+      GroupDao dao = daoSession.getGroupDao();
+      List<Group> groupList = dao.loadAll();
+      LogUtils.d(TAG, "groupList --> " + JsonUtils.get().toJson(groupList));
+      e.onNext(groupList);
+      e.onComplete();
+    });
+  }
+
+  @Override
+  public Observable<List<Chat>> getChatListByGroupId(long groupId) {
+    return Observable.create(e -> {
+      ChatDao dao = daoSession.getChatDao();
+      List<Chat> chatList = dao.queryBuilder().where(ChatDao.Properties.GroupId.eq(groupId)).list();
+      LogUtils.d(TAG, "chatList --> " + JsonUtils.get().toJson(chatList));
+      e.onNext(chatList);
+      e.onComplete();
+    });
   }
 }
