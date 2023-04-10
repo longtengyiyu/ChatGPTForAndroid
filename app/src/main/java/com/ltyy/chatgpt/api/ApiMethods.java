@@ -75,6 +75,7 @@ public class ApiMethods {
             Request request = chain.request()
                     .newBuilder()
                     .header("Authorization", "Bearer " + apiKey)
+                    .header("Content-Type", "application/json")
                     .build();
             LogUtils.d(TAG, "apiKey:" + apiKey);
             LogUtils.d(TAG, "AppApiService url:" + request.url().toString());

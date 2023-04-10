@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.ltyy.chatgpt.R;
 import com.ltyy.chatgpt.api.ApiMethods;
+import com.ltyy.chatgpt.app.AppConstants;
 import com.ltyy.chatgpt.app.AppSPContact;
 import com.ltyy.chatgpt.base.BaseViewDataBindingActivity;
 import com.ltyy.chatgpt.databinding.ActivitySettingBinding;
@@ -22,15 +23,20 @@ import com.ltyy.chatgpt.utils.ToastUtils;
 public class SettingActivity extends BaseViewDataBindingActivity<ActivitySettingBinding> {
 
     public static void startSettingActivity(Context context){
-        context.startActivity(new Intent(context, SettingActivity.class));
+        Intent intent = new Intent(context, SettingActivity.class);
+        intent.putExtra(AppConstants.NEED_TURN, false);
+        context.startActivity(intent);
     }
 
     private boolean showPwd = false;
+    private boolean needTurn = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding.chatBar.setTitle(R.string.setting);
         load();
+        needTurn = savedInstanceState.getBoolean(AppConstants.NEED_TURN);
     }
 
     @Override
@@ -41,7 +47,7 @@ public class SettingActivity extends BaseViewDataBindingActivity<ActivitySetting
     private void load(){
         String apiKey = getSharedPreferencesUtils().getString(AppSPContact.SP_PARAM_API_KEY);
         LogUtils.d(TAG, "apiKey:" + apiKey);
-        if (!TextUtils.isEmpty(apiKey)){
+        if (!TextUtils.isEmpty(apiKey) && needTurn){
             finishAndStartActivity();
         }
     }

@@ -6,6 +6,8 @@ import com.ltyy.chatgpt.bean.Prompt;
 import com.ltyy.chatgpt.bean.PromptRes;
 import com.ltyy.chatgpt.model.ChatModel;
 import com.ltyy.chatgpt.param.PromptParams;
+import com.ltyy.chatgpt.utils.JsonUtils;
+import com.ltyy.chatgpt.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,6 @@ public class ChatViewModel extends BaseViewModel<String> {
     }
     private PromptParams params;
     private List<Message> messages = new ArrayList<>();
-    private Message message;
 
     public void loadPrompt(String prompt){
         chatModel.loadPrompt(new Observer<PromptRes>() {
@@ -62,12 +63,12 @@ public class ChatViewModel extends BaseViewModel<String> {
         if (params == null){
             params = new PromptParams();
         }
-        if (message == null){
-            message = new Message();
-        }
+        Message message = new Message();
         message.setContent(prompt);
         messages.add(message);
+        //base context
         params.setMessages(messages);
+        LogUtils.d(TAG, "params -->" + JsonUtils.get().toJson(params));
         return params;
     }
 }
