@@ -55,37 +55,7 @@ public class ChatViewModel extends BaseViewModel<String> {
     }
 
     public void loadPrompt(String prompt){
-        chatModel.loadPrompt(new Observer<PromptRes>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(@NonNull PromptRes promptRes) {
-                if (promptRes != null && promptRes.getChoices() != null &&
-                        !promptRes.getChoices().isEmpty()){
-                    Prompt prompt = promptRes.getChoices().get(0);
-                    if (prompt != null){
-                        Message message = prompt.getMessage();
-                        if (message != null){
-                            String content = message.getContent();
-                            getData().postValue(content);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        }, getPromptParams(prompt));
+        chatModel.loadPrompt(getData(), getErrorMsg(), getPromptParams(prompt));
     }
 
     private PromptParams getPromptParams(String prompt){
@@ -94,6 +64,9 @@ public class ChatViewModel extends BaseViewModel<String> {
         }
         Message message = new Message();
         message.setContent(prompt);
+        if (messages.size() >= 2){
+            messages.remove(0);
+        }
         messages.add(message);
         //base context
         params.setMessages(messages);

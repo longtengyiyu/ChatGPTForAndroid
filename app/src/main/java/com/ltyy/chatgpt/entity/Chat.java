@@ -15,7 +15,7 @@ public class Chat {
     private Long groupId;
     @Id(autoincrement = true)
     private Long id;
-    private String content;
+    private String content="";
     private int type;
     private String name;
 

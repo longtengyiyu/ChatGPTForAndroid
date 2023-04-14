@@ -33,16 +33,16 @@ public class ChatAdapter extends BaseAdapter<BaseViewHolder<Chat>, Chat> {
 
         @Override
         public void bindViewData(Chat data) {
-            ViewUtils.setGone(binding.tvLeftMsg, binding.tvRightMsg, binding.tvCenterMsg, binding.viewInput);
+            ViewUtils.setGone(binding.tvLeftMsg, binding.tvRightMsg, binding.tvCenterMsg, binding.viewInput, binding.aiLayout);
             FlashingAnimatorUtils.stopFlash();
             if (data.isLeftMessage()){
-                ViewUtils.setVisible(binding.tvLeftMsg);
+                ViewUtils.setVisible(binding.tvLeftMsg, binding.aiLayout);
                 binding.tvLeftMsg.setText(data.getContent());
             } else if (data.isRightMessage()){
                 ViewUtils.setVisible(binding.tvRightMsg);
                 binding.tvRightMsg.setText(data.getContent());
             } else if (data.isInput()){
-                ViewUtils.setVisible(binding.viewInput);
+                ViewUtils.setVisible(binding.viewInput, binding.aiLayout);
                 FlashingAnimatorUtils.flash(binding.viewInput);
             } else {
                 ViewUtils.setVisible(binding.tvCenterMsg);

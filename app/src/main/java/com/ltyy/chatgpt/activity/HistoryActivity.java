@@ -34,6 +34,8 @@ public class HistoryActivity extends BaseMVVMActivity<HistoryViewModel, Activity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initAdapter();
+        binding.chatBar.setTitle(R.string.history_chat);
+        binding.chatBar.hideBack(false);
         viewModel.getGroupList();
     }
 

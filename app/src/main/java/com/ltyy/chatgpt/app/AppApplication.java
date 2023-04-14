@@ -7,6 +7,7 @@ import androidx.multidex.MultiDexApplication;
 
 import com.ltyy.chatgpt.activity.SettingActivity;
 import com.ltyy.chatgpt.api.ApiMethods;
+import com.ltyy.chatgpt.api.RequestService;
 import com.ltyy.chatgpt.db.ChatDaoHelper;
 import com.ltyy.chatgpt.utils.SharedPreferencesUtils;
 
@@ -27,6 +28,7 @@ public class AppApplication extends MultiDexApplication {
         if (!TextUtils.isEmpty(apiKey)){
             ApiMethods.instance(context);
         }
+        RequestService.create();
     }
 
     public static Context getContext(){

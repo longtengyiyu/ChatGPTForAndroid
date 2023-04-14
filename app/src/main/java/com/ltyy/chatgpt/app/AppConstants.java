@@ -15,4 +15,8 @@ public class AppConstants {
 
     public static final long DEFAULT_TIMEOUT = 60;
     public static final long HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 10 * 1024 * 1024;//10MB
+
+    public static final String HTTP_INPUT_TYPE = "application/json";
+
+    public static final String CHAT_STOP ="[DONE]";
 }

@@ -5,6 +5,7 @@ public class Prompt {
     private Message message;
     private int index;
     private String finish_reason;
+    private Message delta;
 
     public Message getMessage() {
         return message;
@@ -28,5 +29,13 @@ public class Prompt {
 
     public void setFinish_reason(String finish_reason) {
         this.finish_reason = finish_reason;
+    }
+
+    public Message getDelta() {
+        return delta;
+    }
+
+    public void setDelta(Message delta) {
+        this.delta = delta;
     }
 }

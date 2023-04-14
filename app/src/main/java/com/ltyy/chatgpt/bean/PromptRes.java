@@ -26,7 +26,7 @@ public class PromptRes {
     private String object;
     private String created;
     private List<Prompt> choices;
-    private String Usage;
+    private String model;
 
     public String getId() {
         return id;
@@ -60,11 +60,11 @@ public class PromptRes {
         this.choices = choices;
     }
 
-    public String getUsage() {
-        return Usage;
+    public String getModel() {
+        return model;
     }
 
-    public void setUsage(String usage) {
-        Usage = usage;
+    public void setModel(String model) {
+        this.model = model;
     }
 }
