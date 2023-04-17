@@ -40,4 +40,28 @@ public class HistoryViewModel extends BaseViewModel<List<Group>> {
             }
         });
     }
+
+    public void removeGroupById(long id){
+        model.removeGroupById(new Observer<Boolean>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Boolean aBoolean) {
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        }, id);
+    }
 }

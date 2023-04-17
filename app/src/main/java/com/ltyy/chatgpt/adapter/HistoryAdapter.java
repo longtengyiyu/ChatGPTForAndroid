@@ -11,6 +11,7 @@ import com.ltyy.chatgpt.base.BaseAdapter;
 import com.ltyy.chatgpt.base.BaseViewHolder;
 import com.ltyy.chatgpt.databinding.ItemHistoryBinding;
 import com.ltyy.chatgpt.entity.Group;
+import com.ltyy.chatgpt.listener.OnItemClickListener;
 import com.ltyy.chatgpt.utils.CommonUtils;
 
 public class HistoryAdapter extends BaseAdapter<BaseViewHolder<Group>, Group> {
@@ -19,11 +20,17 @@ public class HistoryAdapter extends BaseAdapter<BaseViewHolder<Group>, Group> {
         super(context);
     }
 
+    private OnItemClickListener onItemClickListener;
+
     @NonNull
     @Override
     public BaseViewHolder<Group> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemHistoryBinding binding = ItemHistoryBinding.inflate(layoutInflater, parent, false);
         return new ViewHolder(binding.getRoot(), binding);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     public class ViewHolder extends BaseViewHolder<Group> {
@@ -35,6 +42,12 @@ public class HistoryAdapter extends BaseAdapter<BaseViewHolder<Group>, Group> {
             this.binding = binding;
             itemView.setOnClickListener(v ->ChatHistoryActivity.startChatHistoryActivity(context,
                     getItemData(getAdapterPosition()).getId()));
+            itemView.setOnLongClickListener(v -> {
+                if (onItemClickListener != null){
+                    onItemClickListener.onItemClick(getAdapterPosition());
+                }
+                return true;
+            });
         }
 
         @Override

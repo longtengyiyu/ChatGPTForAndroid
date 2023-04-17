@@ -222,7 +222,7 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
         scrollBottom();
     }
 
-    private void back(View v){
+    public void back(View v){
         stop();
         finish();
     }

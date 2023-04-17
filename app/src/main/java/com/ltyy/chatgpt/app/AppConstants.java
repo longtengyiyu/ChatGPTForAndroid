@@ -19,4 +19,6 @@ public class AppConstants {
     public static final String HTTP_INPUT_TYPE = "application/json";
 
     public static final String CHAT_STOP ="[DONE]";
+
+    public static final int REQUEST_CODE_HISTORY = 1001;
 }

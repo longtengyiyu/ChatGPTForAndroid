@@ -82,6 +82,7 @@ public class RequestService {
                     boolean stop = false;
                     while (!stop) {
                         try {
+                            Thread.sleep(20);
                             String line = reader.readLine();
                             if (TextUtils.isEmpty(line))continue;
                             if (AppConstants.CHAT_STOP.equals(line)) {
@@ -111,7 +112,6 @@ public class RequestService {
                                     }
                                 }
                             }
-                            Thread.sleep(500);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

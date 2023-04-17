@@ -40,4 +40,18 @@ public interface IRepository {
      * @return
      */
     Observable<List<Chat>> getChatListByGroupId(long groupId);
+
+    /**
+     * remove group
+     * @param groupId
+     * @return
+     */
+    Observable<Boolean> removeGroupById(long groupId);
+
+    /**
+     * remove chat
+     * @param chat
+     * @return
+     */
+    Observable<Boolean> removeChatById(long chat);
 }

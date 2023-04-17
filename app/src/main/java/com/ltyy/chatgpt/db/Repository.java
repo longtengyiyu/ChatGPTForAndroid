@@ -90,7 +90,11 @@ public class Repository implements IRepository{
   public Observable<List<Group>> getGroupList() {
     return Observable.create(e -> {
       GroupDao dao = daoSession.getGroupDao();
-      List<Group> groupList = dao.loadAll();
+      List<Group> groupList = dao.
+              queryBuilder().
+              where(GroupDao.Properties.Status.eq(0)).
+              orderDesc(GroupDao.Properties.Id).
+              list();
       LogUtils.d(TAG, "groupList --> " + JsonUtils.get().toJson(groupList));
       e.onNext(groupList);
       e.onComplete();
@@ -101,10 +105,59 @@ public class Repository implements IRepository{
   public Observable<List<Chat>> getChatListByGroupId(long groupId) {
     return Observable.create(e -> {
       ChatDao dao = daoSession.getChatDao();
-      List<Chat> chatList = dao.queryBuilder().where(ChatDao.Properties.GroupId.eq(groupId)).list();
+      List<Chat> chatList = dao.
+              queryBuilder().
+              where(ChatDao.Properties.GroupId.eq(groupId),
+                    ChatDao.Properties.Status.eq(0)).
+              list();
       LogUtils.d(TAG, "chatList --> " + JsonUtils.get().toJson(chatList));
       e.onNext(chatList);
       e.onComplete();
     });
+  }
+
+  @Override
+  public Observable<Boolean> removeGroupById(long groupId) {
+    return Observable.create(e -> {
+      updateGroupById(groupId);
+      e.onNext(Boolean.TRUE);
+      e.onComplete();
+    });
+  }
+
+  @Override
+  public Observable<Boolean> removeChatById(long id) {
+    return Observable.create(e -> {
+      ChatDao dao = daoSession.getChatDao();
+      Chat chat = dao.queryBuilder().where(ChatDao.Properties.Id.eq(id)).unique();
+      if (chat != null){
+        chat.setStatus(1);
+        dao.update(chat);
+        //check all chat removed
+        List<Chat> chats = dao.
+                queryBuilder().
+                where(ChatDao.Properties.Id.eq(id),
+                      ChatDao.Properties.Status.eq(0)).
+                list();
+        LogUtils.d(TAG, "chats size --> " + JsonUtils.get().toJson(chats));
+        if (chats == null || chats.isEmpty()){
+          updateGroupById(chat.getGroupId());
+          e.onNext(Boolean.TRUE);
+          e.onComplete();
+        }
+      }
+    });
+  }
+
+  private void updateGroupById(long id){
+    GroupDao dao = daoSession.getGroupDao();
+    Group group = dao.
+            queryBuilder().
+            where(GroupDao.Properties.Id.eq(id)).
+            unique();
+    if (group != null){
+      group.setStatus(1);
+      dao.update(group);
+    }
   }
 }

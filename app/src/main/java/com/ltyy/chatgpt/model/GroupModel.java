@@ -14,7 +14,15 @@ public class GroupModel {
         Repository.getInstance().getGroupList().subscribe(observer);
     }
 
+    public void removeGroupById(Observer<Boolean> observer, long id){
+        Repository.getInstance().removeGroupById(id).subscribe(observer);
+    }
+
     public void getChatList(Observer<List<Chat>> observer, long groupId){
         Repository.getInstance().getChatListByGroupId(groupId).subscribe(observer);
+    }
+
+    public void removeChatById(Observer<Boolean> observer, long id){
+        Repository.getInstance().removeChatById(id).subscribe(observer);
     }
 }

@@ -3,10 +3,6 @@ package com.ltyy.chatgpt.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,31 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ltyy.chatgpt.R;
 import com.ltyy.chatgpt.adapter.ChatAdapter;
-import com.ltyy.chatgpt.animator.SendBtnAnimator;
 import com.ltyy.chatgpt.app.AppConstants;
 import com.ltyy.chatgpt.base.BaseMVVMActivity;
-import com.ltyy.chatgpt.databinding.ActivityChatBinding;
 import com.ltyy.chatgpt.databinding.ActivityChatHistoryBinding;
+import com.ltyy.chatgpt.dialog.DeleteDialog;
 import com.ltyy.chatgpt.entity.Chat;
-import com.ltyy.chatgpt.utils.CommonUtils;
 import com.ltyy.chatgpt.utils.LogUtils;
-import com.ltyy.chatgpt.utils.NetworkUtils;
-import com.ltyy.chatgpt.utils.TextCheckedUtils;
-import com.ltyy.chatgpt.utils.ToastUtils;
-import com.ltyy.chatgpt.viewmodel.ChatViewModel;
 import com.ltyy.chatgpt.viewmodel.HistoryChatViewModel;
-import com.ltyy.chatgpt.viewmodel.HistoryViewModel;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 
 public class ChatHistoryActivity extends BaseMVVMActivity<HistoryChatViewModel, ActivityChatHistoryBinding, List<Chat>> {
 
     private ChatAdapter adapter;
+    private DeleteDialog dialog;
+    private int currentPosition;
 
     public static void startChatHistoryActivity(Context context, long groupId){
         Intent intent = new Intent(context, ChatHistoryActivity.class);
@@ -75,6 +61,26 @@ public class ChatHistoryActivity extends BaseMVVMActivity<HistoryChatViewModel, 
         binding.recyclerView.setLayoutManager(layoutManager);
         adapter = new ChatAdapter(this);
         binding.recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(position ->{
+            currentPosition = position;
+            if (currentPosition >= 0){
+                getDialog().show(ChatHistoryActivity.this.getSupportFragmentManager(), "deleteChatDialog");
+            }
+        });
+    }
+
+    private DeleteDialog getDialog(){
+        if (dialog == null){
+            dialog = DeleteDialog.newInstance();
+            dialog.setListener(() -> {
+                Chat chat = adapter.getItemData(currentPosition);
+                long chatId = chat.getId();
+                viewModel.removeChatById(chatId);
+                getDialog().dismissAllowingStateLoss();
+                adapter.removeItem(currentPosition);
+            });
+        }
+        return dialog;
     }
 
     @Override

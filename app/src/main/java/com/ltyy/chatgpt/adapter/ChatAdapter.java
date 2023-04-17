@@ -8,10 +8,14 @@ import com.ltyy.chatgpt.base.BaseAdapter;
 import com.ltyy.chatgpt.base.BaseViewHolder;
 import com.ltyy.chatgpt.entity.Chat;
 import com.ltyy.chatgpt.databinding.ItemMsgBinding;
+import com.ltyy.chatgpt.listener.OnItemClickListener;
 import com.ltyy.chatgpt.utils.FlashingAnimatorUtils;
 import com.ltyy.chatgpt.widget.ViewUtils;
 
 public class ChatAdapter extends BaseAdapter<BaseViewHolder<Chat>, Chat> {
+
+    private OnItemClickListener onItemClickListener;
+
     public ChatAdapter(Context context) {
         super(context);
     }
@@ -23,12 +27,22 @@ public class ChatAdapter extends BaseAdapter<BaseViewHolder<Chat>, Chat> {
         return new ViewHolder(binding.getRoot(), binding);
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
     public class ViewHolder extends BaseViewHolder<Chat> {
 
         ItemMsgBinding binding;
         public ViewHolder(View itemView, ItemMsgBinding binding) {
             super(itemView);
             this.binding = binding;
+            itemView.setOnLongClickListener(v -> {
+                if (onItemClickListener != null){
+                    onItemClickListener.onItemClick(getAdapterPosition());
+                }
+                return true;
+            });
         }
 
         @Override
