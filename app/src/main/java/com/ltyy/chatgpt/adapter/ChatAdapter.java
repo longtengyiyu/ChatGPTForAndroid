@@ -37,6 +37,7 @@ public class ChatAdapter extends BaseAdapter<BaseViewHolder<Chat>, Chat> {
         public ViewHolder(View itemView, ItemMsgBinding binding) {
             super(itemView);
             this.binding = binding;
+            binding.tvLeftMsg.setTextIsSelectable(true);
             itemView.setOnLongClickListener(v -> {
                 if (onItemClickListener != null){
                     onItemClickListener.onItemClick(getAdapterPosition());

@@ -9,17 +9,7 @@ import android.view.Gravity;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AlertDialog;
-/**
- * Author:    Carl
- * Version    V1.0
- * Date:      2022/1/12 13:37
- * Description:
- * Modification  History:
- * Date         	Author        		Version        	Description
- * -----------------------------------------------------------------------------------
- * 2022/1/12         Carl            1.0                    1.0
- * Why & What is modified:
- */
+
 public class AppDpiUtils {
     private static final String TAG = AppDpiUtils.class.getSimpleName();
 

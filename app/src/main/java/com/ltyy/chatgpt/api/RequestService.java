@@ -85,7 +85,7 @@ public class RequestService {
                             Thread.sleep(20);
                             String line = reader.readLine();
                             if (TextUtils.isEmpty(line))continue;
-                            if (AppConstants.CHAT_STOP.equals(line)) {
+                            if (AppConstants.CHAT_STOP.equals(line.replace("data: ", ""))) {
                                 stop = true;
                                 data.postValue(AppConstants.CHAT_STOP);
                             }else {

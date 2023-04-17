@@ -199,18 +199,20 @@ public class ChatActivity extends BaseMVVMActivity<ChatViewModel, ActivityChatBi
 
     @Override
     protected void onResponseSuccess(String s) {
-        stop();
         addResChat(s);
     }
 
     private void addResChat(String content){
-        binding.tvSend.setEnabled(true);
         int position = adapter.getItemCount() - 1;
         Chat chat = adapter.getItemData(position);
         chat.setType(Chat.TYPE_AI);
-        chat.setContent(chat.getContent() + content.replaceAll("\n", ""));
-        viewModel.saveChat(chat);
-        adapter.notifyItemChanged(position);
+        if (AppConstants.CHAT_STOP.equals(content)){
+            binding.tvSend.setEnabled(true);
+            viewModel.saveChat(chat);
+        }else{
+            chat.setContent(chat.getContent() + content.replaceAll("\n", ""));
+            adapter.notifyItemChanged(position);
+        }
         scrollBottom();
     }
 
