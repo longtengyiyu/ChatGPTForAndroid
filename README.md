@@ -1,5 +1,6 @@
 # ChatGPTForAndroid
 A android application for ChatGPT API (OpenAI API)
 
-<video controls src="./video.mp4"></video>
+<video src="https://raw.githubusercontent.com/longtengyiyu/ChatGPTForAndroid/develop/video.mp4" controls></video>
+
 
