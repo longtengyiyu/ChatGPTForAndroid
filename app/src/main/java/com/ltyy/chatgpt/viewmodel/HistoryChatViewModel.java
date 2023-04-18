@@ -1,5 +1,7 @@
 package com.ltyy.chatgpt.viewmodel;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.ltyy.chatgpt.base.BaseViewModel;
 import com.ltyy.chatgpt.entity.Chat;
 import com.ltyy.chatgpt.entity.Group;
@@ -40,5 +42,28 @@ public class HistoryChatViewModel extends BaseViewModel<List<Chat>> {
 
             }
         }, groupId);
+    }
+
+    public void removeChatById(long chatId){
+        model.removeChatById(new Observer<Boolean>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Boolean a) {
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        }, chatId);
     }
 }

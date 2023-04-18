@@ -29,6 +29,7 @@ public class ChatDao extends AbstractDao<Chat, Long> {
         public final static Property Content = new Property(2, String.class, "content", false, "CONTENT");
         public final static Property Type = new Property(3, int.class, "type", false, "TYPE");
         public final static Property Name = new Property(4, String.class, "name", false, "NAME");
+        public final static Property Status = new Property(5, int.class, "status", false, "STATUS");
     }
 
 
@@ -48,7 +49,8 @@ public class ChatDao extends AbstractDao<Chat, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 1: id
                 "\"CONTENT\" TEXT," + // 2: content
                 "\"TYPE\" INTEGER NOT NULL ," + // 3: type
-                "\"NAME\" TEXT);"); // 4: name
+                "\"NAME\" TEXT," + // 4: name
+                "\"STATUS\" INTEGER NOT NULL );"); // 5: status
     }
 
     /** Drops the underlying database table. */
@@ -81,6 +83,7 @@ public class ChatDao extends AbstractDao<Chat, Long> {
         if (name != null) {
             stmt.bindString(5, name);
         }
+        stmt.bindLong(6, entity.getStatus());
     }
 
     @Override
@@ -107,6 +110,7 @@ public class ChatDao extends AbstractDao<Chat, Long> {
         if (name != null) {
             stmt.bindString(5, name);
         }
+        stmt.bindLong(6, entity.getStatus());
     }
 
     @Override
@@ -121,7 +125,8 @@ public class ChatDao extends AbstractDao<Chat, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // id
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // content
             cursor.getInt(offset + 3), // type
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // name
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // name
+            cursor.getInt(offset + 5) // status
         );
         return entity;
     }
@@ -133,6 +138,7 @@ public class ChatDao extends AbstractDao<Chat, Long> {
         entity.setContent(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setType(cursor.getInt(offset + 3));
         entity.setName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setStatus(cursor.getInt(offset + 5));
      }
     
     @Override

@@ -11,7 +11,7 @@ public class PromptParams {
     private float temperature = 0.5f;
     private Integer top_p = 1;
     private Integer n = 1;
-    private Boolean stream = false;
+    private Boolean stream = true;
     private Boolean logprobs;
     private String stop;
 
@@ -77,5 +77,19 @@ public class PromptParams {
 
     public void setStop(String stop) {
         this.stop = stop;
+    }
+
+    @Override
+    public String toString() {
+        return "PromptParams{" +
+                "model='" + model + '\'' +
+                ", messages=" + messages +
+                ", temperature=" + temperature +
+                ", top_p=" + top_p +
+                ", n=" + n +
+                ", stream=" + stream +
+                ", logprobs=" + logprobs +
+                ", stop='" + stop + '\'' +
+                '}';
     }
 }

@@ -65,4 +65,17 @@ public class BaseAdapter <VH extends BaseViewHolder<T>, T> extends RecyclerView.
             notifyItemRangeChanged(position, data.size());
         }
     }
+
+    public void removeItem(int position){
+        if (position >= 0 && position < dataList.size()) {
+            dataList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void removeAll(){
+        if (!dataList.isEmpty()){
+            dataList.clear();
+        }
+    }
 }

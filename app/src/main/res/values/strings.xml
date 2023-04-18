@@ -12,4 +12,5 @@
     <string name="hide_msg"></string>
     <string name="toast_network_error">network error</string>
     <string name="time_out">connect time out</string>
+    <string name="dialog_tips_delete">Do you want remove this data?</string>
 </resources>

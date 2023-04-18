@@ -30,4 +30,8 @@ public class JsonUtils {
         return gson.toJson(o);
     }
 
+    public Gson getGson(){
+        return gson;
+    }
+
 }

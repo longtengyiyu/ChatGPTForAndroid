@@ -15,17 +15,20 @@ public class Chat {
     private Long groupId;
     @Id(autoincrement = true)
     private Long id;
-    private String content;
+    private String content="";
     private int type;
     private String name;
+    private int status; //0:normal 1:deleted 2:expired
 
-    @Generated(hash = 1013681761)
-    public Chat(Long groupId, Long id, String content, int type, String name) {
+    @Generated(hash = 782219211)
+    public Chat(Long groupId, Long id, String content, int type, String name,
+            int status) {
         this.groupId = groupId;
         this.id = id;
         this.content = content;
         this.type = type;
         this.name = name;
+        this.status = status;
     }
 
     @Generated(hash = 519536279)
@@ -82,5 +85,13 @@ public class Chat {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

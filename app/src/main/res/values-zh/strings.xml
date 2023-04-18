@@ -12,4 +12,5 @@
     <string name="hide_msg"></string>
     <string name="toast_network_error">网络连接错误</string>
     <string name="time_out">连接超时，请重试！</string>
+    <string name="dialog_tips_delete">是否移除数据</string>
 </resources>

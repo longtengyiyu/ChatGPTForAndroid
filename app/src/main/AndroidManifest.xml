@@ -15,6 +15,13 @@
         android:supportsRtl="true"
         android:name=".app.AppApplication"
         android:theme="@style/Theme.App">
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360"/>
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640"/>
+
         <activity android:name=".activity.SettingActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -28,8 +35,7 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".activity.ChatActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".activity.HistoryActivity"
             android:screenOrientation="portrait"/>

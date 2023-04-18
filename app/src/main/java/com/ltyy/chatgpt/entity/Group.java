@@ -10,11 +10,13 @@ public class Group {
     private Long id;
     private String content;
     private long timestamp;
-    @Generated(hash = 449019253)
-    public Group(Long id, String content, long timestamp) {
+    private int status; //0:normal 1 deleted 2expired
+    @Generated(hash = 1812956325)
+    public Group(Long id, String content, long timestamp, int status) {
         this.id = id;
         this.content = content;
         this.timestamp = timestamp;
+        this.status = status;
     }
     @Generated(hash = 117982048)
     public Group() {
@@ -36,5 +38,11 @@ public class Group {
     }
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+    public int getStatus() {
+        return this.status;
+    }
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

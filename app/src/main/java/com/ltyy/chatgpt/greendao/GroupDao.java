@@ -27,6 +27,7 @@ public class GroupDao extends AbstractDao<Group, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Content = new Property(1, String.class, "content", false, "CONTENT");
         public final static Property Timestamp = new Property(2, long.class, "timestamp", false, "TIMESTAMP");
+        public final static Property Status = new Property(3, int.class, "status", false, "STATUS");
     }
 
 
@@ -44,7 +45,8 @@ public class GroupDao extends AbstractDao<Group, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"GROUP\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"CONTENT\" TEXT," + // 1: content
-                "\"TIMESTAMP\" INTEGER NOT NULL );"); // 2: timestamp
+                "\"TIMESTAMP\" INTEGER NOT NULL ," + // 2: timestamp
+                "\"STATUS\" INTEGER NOT NULL );"); // 3: status
     }
 
     /** Drops the underlying database table. */
@@ -67,6 +69,7 @@ public class GroupDao extends AbstractDao<Group, Long> {
             stmt.bindString(2, content);
         }
         stmt.bindLong(3, entity.getTimestamp());
+        stmt.bindLong(4, entity.getStatus());
     }
 
     @Override
@@ -83,6 +86,7 @@ public class GroupDao extends AbstractDao<Group, Long> {
             stmt.bindString(2, content);
         }
         stmt.bindLong(3, entity.getTimestamp());
+        stmt.bindLong(4, entity.getStatus());
     }
 
     @Override
@@ -95,7 +99,8 @@ public class GroupDao extends AbstractDao<Group, Long> {
         Group entity = new Group( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // content
-            cursor.getLong(offset + 2) // timestamp
+            cursor.getLong(offset + 2), // timestamp
+            cursor.getInt(offset + 3) // status
         );
         return entity;
     }
@@ -105,6 +110,7 @@ public class GroupDao extends AbstractDao<Group, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setContent(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setTimestamp(cursor.getLong(offset + 2));
+        entity.setStatus(cursor.getInt(offset + 3));
      }
     
     @Override
