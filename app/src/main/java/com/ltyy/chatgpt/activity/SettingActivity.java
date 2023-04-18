@@ -35,10 +35,10 @@ public class SettingActivity extends BaseViewDataBindingActivity<ActivitySetting
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding.chatBar.setTitle(R.string.setting);
-        load();
         if (getIntent() != null){
-            needTurn = getIntent().getBooleanExtra(AppConstants.NEED_TURN, false);
+            needTurn = getIntent().getBooleanExtra(AppConstants.NEED_TURN, true);
         }
+        load();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SettingActivity extends BaseViewDataBindingActivity<ActivitySetting
 
     private void load(){
         String apiKey = getSharedPreferencesUtils().getString(AppSPContact.SP_PARAM_API_KEY);
-        LogUtils.d(TAG, "apiKey:" + apiKey);
+        LogUtils.d(TAG, "apiKey:" + apiKey + " needTurn:" + needTurn);
         if (!TextUtils.isEmpty(apiKey) && needTurn){
             finishAndStartActivity();
         }

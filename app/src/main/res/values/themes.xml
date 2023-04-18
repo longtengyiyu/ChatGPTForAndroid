@@ -13,12 +13,14 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:alertDialogTheme">@style/AlertDialogCustom</item>
         <!-- Customize your theme here. -->
+        <item name="android:alertDialogTheme">@style/AlertDialogCustom</item>
+        <item name="android:dialogTheme">@style/AlertDialogCustom</item>
     </style>
 
     <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
-        <item name="android:textSize">32dp</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:windowMinWidthMinor">@dimen/bd_dialog_min_width_minor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

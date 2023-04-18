@@ -4,24 +4,24 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="10dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_icon"
-            android:layout_width="48dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="130dp" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_0968"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:textSize="48dp"
-            android:layout_marginStart="200dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:textSize="20dp"
+            android:layout_marginStart="50dp"
             android:layout_gravity="center_vertical"
             tools:text="新会话"/>
 
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_gravity="bottom"
-            android:layout_marginStart="130dp"
+            android:layout_marginStart="20dp"
             android:background="@color/color_c" />
 
     </FrameLayout>
