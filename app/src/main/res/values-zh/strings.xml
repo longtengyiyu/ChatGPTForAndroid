@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ChatgptForAndroid</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="toast_empty">API Key 不能为空</string>
+    <string name="setting">设置</string>
+    <string name="main">主页</string>
+    <string name="history_chat">聊天历史</string>
+    <string name="new_chat">新聊天</string>
+    <string name="chat">聊天</string>
+    <string name="tips_chat">开始新的聊天</string>
+    <string name="hide_msg"></string>
+    <string name="toast_network_error">网络连接错误</string>
+    <string name="time_out">连接超时，请重试！</string>
+    <string name="dialog_tips_delete">是否移除数据</string>
+</resources>

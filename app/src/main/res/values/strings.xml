@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ChatgptForAndroid</string>
+    <string name="save">save</string>
+    <string name="cancel">cancel</string>
+    <string name="toast_empty">API Key cannot be empty</string>
+    <string name="setting">setting</string>
+    <string name="main">Main</string>
+    <string name="chat">Chat</string>
+    <string name="history_chat">Chat History</string>
+    <string name="new_chat">New History</string>
+    <string name="tips_chat">Start a new chat</string>
+    <string name="hide_msg"></string>
+    <string name="toast_network_error">network error</string>
+    <string name="time_out">connect time out</string>
+    <string name="dialog_tips_delete">Do you want remove this data?</string>
+</resources>
